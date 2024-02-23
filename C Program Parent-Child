@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<sys/wait.h>
+int main ()
+{
+    int n;
+    printf("Enter a number : ");
+    scanf("%d",&n);
+    pid_t pid;
+    pid = fork();
+    if(pid == 0) {
+        printf("\nThis is a child process ");
+        if(n%2!=0) {
+            for (int i=1; i<=n; i+=2) {
+                printf("Child: %d\n", i );
+            }
+        } else {
+            printf("\nChild: n is even");
+        }
+    } else {
+        printf("\nThis is a parent process ");
+        if(n%2==0) {
+            for(int i=2; i<=n; i+=2) {
+                printf("Parent %d\n", i );
+            }
+        } else {
+            printf("\nParent: n is odd");
+        }
+    }
+    return 0;
+}
